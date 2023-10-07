@@ -29,9 +29,10 @@
   "fzy-lua-native": { "branch": "master", "commit": "820f745b7c442176bcc243e8f38ef4b985febfaf" },
   "gitsigns.nvim": { "branch": "main", "commit": "e32efa6d6acb4a2e2e270f329df6a65080702066" },
   "glance.nvim": { "branch": "master", "commit": "8ed5cf3b3b1231ea696d88c9efd977027429d869" },
+  "gruvbox-material": { "branch": "master", "commit": "5fd0f0e4133d2416b0d69c26c87189fced9060ec" },
   "hop.nvim": { "branch": "master", "commit": "f2508f415b9fe34082696009574ca26f57a66531" },
-  "indent-blankline.nvim": { "branch": "master", "commit": "af58360b3070650b0d151210e9c63df92ce78f3e" },
-  "lazy.nvim": { "branch": "main", "commit": "59335c5b9d116f5d3948f833288a89e2a829a005" },
+  "indent-blankline.nvim": { "branch": "master", "commit": "877c1db2bf957300097dd5348a665666a4d900cb" },
+  "lazy.nvim": { "branch": "main", "commit": "6687afae42b72fb660bfae2bd0eb98e77156829b" },
   "lsp_signature.nvim": { "branch": "master", "commit": "46ab0c1fe34aed7e442cc7b747d99197cc0ccf31" },
   "lspsaga.nvim": { "branch": "main", "commit": "f8a6d7cfe185637616d7fdee676dd543ae5fde55" },
   "lualine.nvim": { "branch": "master", "commit": "45e27ca739c7be6c49e5496d14fcf45a303c3a63" },
@@ -87,6 +88,5 @@
   "vim-illuminate": { "branch": "master", "commit": "1b5d70332a51a1de05f281069851865a2bb1e6d7" },
   "vim-matchup": { "branch": "master", "commit": "6dbe108230c7dbbf00555b7d4d9f6a891837ef07" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
-  "wilder.nvim": { "branch": "master", "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf" },
-  "gruvbox-material": { "branch": "master", "commit": "5fd0f0e4133d2416b0d69c26c87189fced9060ec" }
+  "wilder.nvim": { "branch": "master", "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf" }
 }
