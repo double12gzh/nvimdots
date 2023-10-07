@@ -218,7 +218,8 @@ return function()
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
-			theme = "gruvbox-material",
+			theme = "auto",
+			-- theme = "gruvbox-material",
 			disabled_filetypes = { statusline = { "alpha" } },
 			component_separators = "",
 			section_separators = { left = "", right = "" },
