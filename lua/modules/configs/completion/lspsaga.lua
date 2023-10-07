@@ -36,6 +36,18 @@ return function()
 			color_mode = true,
 			delay = 100,
 		},
+		finder = {
+            		keys = {
+                		shuttle = '[w',
+                		toggle_or_open = '<CR>',
+               			vsplit = 'v',
+                		split = 's',
+                		tabe = 't',
+                		tabnew = 'r',
+                		quit = 'q',
+                		close = '<C-c>k',
+            		},
+        	},
 		-- https://dev.neovim.pro/lspsaga/callhierarchy/
 		callhierarchy = {
 			layout = "float",

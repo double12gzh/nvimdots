@@ -15,12 +15,14 @@ return function()
 			show_buffer_icons = true,
 			show_buffer_close_icons = true,
 			get_element_icon = function(buf)
-				return require("nvim-web-devicons").get_icon(buf.filetype, { default = false })
+			get_element_icon = function(buf)
+                		require("nvim-web-devicons").set_default_icon('', '#6d8086', 65)
+				return require("nvim-web-devicons").get_icon(buf.filetype, { default = true })
 			end,
 			-- show_buffer_default_icon = true,
 			show_close_icon = true,
 			show_tab_indicators = true,
-			enforce_regular_tabs = false,
+			enforce_regular_tabs = true,
 			persist_buffer_sort = true,
 			always_show_bufferline = true,
 			separator_style = "thin",
@@ -33,14 +35,20 @@ return function()
 					filetype = "NvimTree",
 					text = "File Explorer",
 					text_align = "center",
-					padding = 0,
+					padding = 1,
 				},
 				{
-					filetype = "Outline",
-					text = "Symbol Outline",
+					filetype = "lspsagaoutline",
+					text = "Lspsaga Outline",
 					text_align = "center",
-					padding = 0,
+					padding = 1,
 				},
+				-- {
+				-- 	filetype = "Outline",
+				-- 	text = "Symbol Outline",
+				-- 	text_align = "center",
+				-- 	padding = 1,
+				-- },
 			},
 		},
 		-- Change bufferline's highlights here! See `:h bufferline-highlights` for detailed explanation.
@@ -55,7 +63,8 @@ return function()
 			highlights = require("catppuccin.groups.integrations.bufferline").get({
 				styles = { "italic", "bold" },
 				custom = {
-					all = {
+					-- all = {
+					mocha = {
 						-- Hint
 						hint = { fg = cp.rosewater },
 						hint_visible = { fg = cp.rosewater },

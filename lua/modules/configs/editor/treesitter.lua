@@ -55,6 +55,8 @@ return vim.schedule_wrap(function()
 		matchup = { enable = true },
 	}, false, require("nvim-treesitter.configs").setup)
 	-- speed
+	require 'nvim-treesitter.install'.compilers = { "gcc" }
+	-- speed
 	require("nvim-treesitter.install").command_extra_args = {
 		curl = { "--proxy", global.proxy_nvim },
 	}
