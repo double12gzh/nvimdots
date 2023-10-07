@@ -1,3 +1,5 @@
+local bind = require("keymap.bind")
+local map_cr = bind.map_cr
 local mappings = {}
 
 -- Place global keymaps here.
@@ -8,8 +10,16 @@ mappings["plug_map"] = {}
 ---@param buf number @The effective bufnr
 mappings["lsp"] = function(buf)
 	return {
-		-- Example
-		["n|K"] = require("keymap.bind").map_cr("Lspsaga hover_doc"):with_buffer(buf):with_desc("lsp: Show doc"),
+		-- quick --
+		["n|gD"] = map_cr("Lspsaga peek_definition"):with_buffer(buf):with_desc("lsp: Preview definition"),
+		["n|gd"] = map_cr("Lspsaga goto_definition"):with_buffer(buf):with_desc("lsp: Goto definition"),
+		["n|gh"] = map_cr("Lspsaga finder ref"):with_buffer(buf):with_desc("lsp: Show reference"),
+		["n|gi"] = map_cr("Lspsaga finder imp"):with_buffer(buf):with_desc("lsp: Show reference"),
+		--["n|gD"] = map_cr("Glance definitions"):with_buffer(buf):with_desc("lsp: Preview definition"),
+		--["n|gd"] = map_cr("Glance definitions"):with_buffer(buf):with_desc("lsp: Show reference"),
+		--["n|gh"] = map_cr("Glance references"):with_buffer(buf):with_desc("lsp: Show reference"),
+		--["n|gi"] = map_cr("Glance implementations"):with_buffer(buf):with_desc("lsp: Show reference"),
+		-- quick --
 	}
 end
 
