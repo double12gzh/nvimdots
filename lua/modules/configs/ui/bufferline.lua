@@ -15,7 +15,7 @@ return function()
 			show_buffer_icons = true,
 			show_buffer_close_icons = true,
 			get_element_icon = function(buf)
-                require("nvim-web-devicons").set_default_icon('', '#6d8086', 65)
+				require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
 				return require("nvim-web-devicons").get_icon(buf.filetype, { default = true })
 			end,
 			-- show_buffer_default_icon = true,
