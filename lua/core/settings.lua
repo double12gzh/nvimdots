@@ -112,7 +112,6 @@ settings["null_ls_deps"] = {
 	"gofumpt",
 	"goimports",
 	"prettier",
-	"rustfmt",
 	"shfmt",
 	"stylua",
 	"vint",
