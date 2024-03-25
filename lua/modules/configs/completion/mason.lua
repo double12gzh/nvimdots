@@ -14,9 +14,9 @@ M.setup = function()
 	require("modules.utils").load_plugin("mason", {
 		-- speed
 		max_concurrent_installers = 30,
-		github = {
-			download_url_template = "https://ghproxy.com/https://github.com/%s/releases/download/%s/%s",
-		},
+		--github = {
+		--	download_url_template = "https://ghproxy.com/https://github.com/%s/releases/download/%s/%s",
+		--},
 		ui = {
 			border = "single",
 			icons = {

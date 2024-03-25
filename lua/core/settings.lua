@@ -2,7 +2,7 @@ local settings = {}
 local home = require("core.global").home
 
 -- Set it to false if you want to use https to update plugins and treesitter parsers.
-settings["use_ssh"] = false
+settings["use_ssh"] = true
 
 -- Set it to false if there are no need to format on save.
 ---@type boolean
