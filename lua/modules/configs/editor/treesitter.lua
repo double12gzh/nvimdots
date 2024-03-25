@@ -1,5 +1,3 @@
-local global = require("core.global")
-
 return vim.schedule_wrap(function()
 	local use_ssh = require("core.settings").use_ssh
 
