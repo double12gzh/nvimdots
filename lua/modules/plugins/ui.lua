@@ -10,12 +10,12 @@ ui["akinsho/bufferline.nvim"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
-ui["Jint-lzxy/nvim"] = {
-	lazy = false,
-	branch = "refactor/syntax-highlighting",
-	name = "gruvbox-material",
-	config = require("ui.gruvbox-material"),
-}
+-- ui["Jint-lzxy/nvim"] = {
+-- 	lazy = false,
+-- 	branch = "refactor/syntax-highlighting",
+-- 	name = "catppuccin",
+-- 	config = require("ui.catppuccin"),
+-- }
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
@@ -66,6 +66,13 @@ ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.scrollview"),
+}
+ui["sainnhe/gruvbox-material"] = {
+	lazy = true,
+	--event = "VimEnter",
+	config = function()
+		require("ui.gruvbox-material")
+	end,
 }
 
 return ui
