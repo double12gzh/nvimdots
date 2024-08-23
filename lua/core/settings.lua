@@ -86,7 +86,7 @@ settings["palette_overwrite"] = {}
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`.
 ---@type string
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "gruvbox-material"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
@@ -198,7 +198,7 @@ settings["neovide_config"] = {
 
 -- Set the dashboard startup image here
 -- You can generate the ascii image using: https://github.com/TheZoraiz/ascii-image-converter
--- More info: https://github.com/ayamir/nvimdots/wiki/Issues#change-dashboard-startup-image
+-- More info: https://github.com/double12gzh/nvimdots/wiki/Issues#change-dashboard-startup-image
 ---@type string[]
 settings["dashboard_image"] = {
 	[[⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],

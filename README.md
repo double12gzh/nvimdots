@@ -6,32 +6,32 @@
         alt="Neovim Version Capability"
         src="https://img.shields.io/badge/Supports%20Nvim-v0.10-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
     </a>
-    <a href="https://github.com/ayamir/nvimdots/releases">
+    <a href="https://github.com/double12gzh/nvimdots/releases">
     <img
         alt="Release"
-        src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
+        src="https://img.shields.io/github/v/release/double12gzh/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
     </a>
 </h1>
 
 <p align="center">
-    <a href="https://github.com/ayamir/nvimdots/stargazers">
+    <a href="https://github.com/double12gzh/nvimdots/stargazers">
     <img
         alt="Stars"
-        src="https://img.shields.io/github/stars/ayamir/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/stars/double12gzh/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&logoColor=D9E0EE&style=for-the-badge">
     </a>
-    <a href="https://github.com/ayamir/nvimdots/issues">
+    <a href="https://github.com/double12gzh/nvimdots/issues">
     <img
         alt="Issues"
-        src="https://img.shields.io/github/issues-raw/ayamir/nvimdots?colorA=363A4f&colorB=F5A97F&logo=github&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/issues-raw/double12gzh/nvimdots?colorA=363A4f&colorB=F5A97F&logo=github&logoColor=D9E0EE&style=for-the-badge">
     </a>
-    <a href="https://github.com/ayamir/nvimdots/contributors">
+    <a href="https://github.com/double12gzh/nvimdots/contributors">
     <img
         alt="Contributors"
-        src="https://img.shields.io/github/contributors/ayamir/nvimdots?colorA=363A4F&colorB=B5E8E0&logo=git&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/contributors/double12gzh/nvimdots?colorA=363A4F&colorB=B5E8E0&logo=git&logoColor=D9E0EE&style=for-the-badge">
     </a>
     <img
         alt="Code Size"
-        src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/languages/code-size/double12gzh/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
 </p>
 
 ## 🪷 Introduction
@@ -73,51 +73,51 @@ Simply run the following interactive bootstrap command, and you should be all se
 - **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
 
 ```pwsh
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/double12gzh/nvimdots/HEAD/scripts/install.ps1'))
 ```
 
 - **\*nix**
 
 ```sh
 if command -v curl >/dev/null 2>&1; then
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/double12gzh/nvimdots/HEAD/scripts/install.sh)"
 else
-    bash -c "$(wget -O- https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)"
+    bash -c "$(wget -O- https://raw.githubusercontent.com/double12gzh/nvimdots/HEAD/scripts/install.sh)"
 fi
 ```
 
-It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites) before starting, especially for \*nix users.
+It's strongly recommended to read [Wiki: Prerequisites](https://github.com/double12gzh/nvimdots/wiki/Prerequisites) before starting, especially for \*nix users.
 
 ## ⚙️ Configuration & Usage
 
 <h3 align="center">
     🗺️ Keybindings
 </h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Keybindings" rel="nofollow">Wiki: Keybindings</a> for details</p>
+<p align="center">See <a href="https://github.com/double12gzh/nvimdots/wiki/Keybindings" rel="nofollow">Wiki: Keybindings</a> for details</p>
 <br>
 
 <h3 align="center">
     🔌 Plugins & Deps
 </h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Plugins" rel="nofollow">Wiki: Plugins</a> for details <br><em>(You can also find a deps diagram there!)</em></p>
+<p align="center">See <a href="https://github.com/double12gzh/nvimdots/wiki/Plugins" rel="nofollow">Wiki: Plugins</a> for details <br><em>(You can also find a deps diagram there!)</em></p>
 <br>
 
 <h3 align="center">
     🔧 Usage & Customization
 </h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Usage" rel="nofollow">Wiki: Usage</a> for details</p>
+<p align="center">See <a href="https://github.com/double12gzh/nvimdots/wiki/Usage" rel="nofollow">Wiki: Usage</a> for details</p>
 <br>
 
 <h3 align="center" id="nixos-support" name="nixos-support">
     ❄️  NixOS Support
 </h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/NixOS-Support" rel="nofollow">Wiki: NixOS Support</a> for details</p>
+<p align="center">See <a href="https://github.com/double12gzh/nvimdots/wiki/NixOS-Support" rel="nofollow">Wiki: NixOS Support</a> for details</p>
 <br>
 
 <h3 align="center">
     🤔 FAQ
 </h3>
-<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Issues" rel="nofollow">Wiki: FAQ</a> for details</p>
+<p align="center">See <a href="https://github.com/double12gzh/nvimdots/wiki/Issues" rel="nofollow">Wiki: FAQ</a> for details</p>
 
 ## ✨ Features
 
@@ -126,14 +126,14 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 </h3>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/startuptime.png"
+  <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/startuptime.png"
   width = "80%"
   alt = "StartupTime"
   />
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/vimstartup.png"
+  <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/vimstartup.png"
   width = "60%"
   alt = "Vim-StartupTime"
   />
@@ -146,43 +146,43 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 </h3>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/dashboard.png" alt="Dashboard">
+    <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/dashboard.png" alt="Dashboard">
     <em>Dashboard</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/telescope.png" alt="Telescope">
+    <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/telescope.png" alt="Telescope">
     <em>Telescope</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/coding.png" alt="Coding">
+    <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/coding.png" alt="Coding">
     <em>Coding</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/code_action.png" alt="Code Action">
+    <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/code_action.png" alt="Code Action">
     <em>Code Action</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/dap.png" alt="Debugging">
+    <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/dap.png" alt="Debugging">
     <em>Debugging</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/lazygit.png" alt="Lazygit">
+    <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/lazygit.png" alt="Lazygit">
     <em>Lazygit with built-in Terminal</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/command_ref.png" alt="Command quickref">
+    <img src="https://raw.githubusercontent.com/double12gzh/blog-imgs/main/command_ref.png" alt="Command quickref">
     <em>Command quickref</em>
 </p>
 
@@ -194,7 +194,7 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 
 ## ❤️ Thanks to
 
-- [ayamir](https://github.com/ayamir)
+- [double12gzh](https://github.com/double12gzh)
 - [Jint-lzxy](https://github.com/Jint-lzxy)
 - [CharlesChiuGit](https://github.com/CharlesChiuGit)
 - [aarnphm](https://github.com/aarnphm)
@@ -213,4 +213,4 @@ This Neovim configuration is released under the BSD 3-Clause license, which gran
 - Modification
 - Private use
 
-For more convoluted language, see the [LICENSE](https://github.com/ayamir/nvimdots/blob/main/LICENSE).
+For more convoluted language, see the [LICENSE](https://github.com/double12gzh/nvimdots/blob/main/LICENSE).

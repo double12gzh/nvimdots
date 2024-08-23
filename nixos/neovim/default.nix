@@ -19,8 +19,8 @@ in
     programs.neovim = {
       nvimdots = {
         enable = mkEnableOption ''
-          Activate "ayamir/nvimdots".
-          Have a look at https://github.com/ayamir/nvimdots for details
+          Activate "double12gzh/nvimdots".
+          Have a look at https://github.com/double12gzh/nvimdots for details
         '';
         bindLazyLock = mkEnableOption ''
           Bind lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.

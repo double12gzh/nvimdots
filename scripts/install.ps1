@@ -349,7 +349,7 @@ You must install Git before installing this Nvim config. See:
 '@
 	}
 
-	info -Msg "This script will install ayamir/nvimdots to:"
+	info -Msg "This script will install double12gzh/nvimdots to:"
 	Write-Host $env:CCDEST_DIR
 
 	if ((Test-Path $env:CCDEST_DIR)) {
@@ -371,9 +371,9 @@ You must install Git before installing this Nvim config. See:
 	info -Msg "Fetching in progress..."
 
 	if ($USE_SSH) {
-		clone_repo -WithURL 'git@github.com:ayamir/nvimdots.git'
+		clone_repo -WithURL 'git@github.com:double12gzh/nvimdots.git'
 	} else {
-		clone_repo -WithURL 'https://github.com/ayamir/nvimdots.git'
+		clone_repo -WithURL 'https://github.com/double12gzh/nvimdots.git'
 	}
 
 	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
@@ -397,10 +397,10 @@ You must install Git before installing this Nvim config. See:
 
 Thank you for using this set of configuration!
 - Project Homepage:
-    https://github.com/ayamir/nvimdots
+    https://github.com/double12gzh/nvimdots
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 - Further documentation (including executables you |must| install for full functionality):
-    https://github.com/ayamir/nvimdots/wiki/Prerequisites
+    https://github.com/double12gzh/nvimdots/wiki/Prerequisites
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 '@
 

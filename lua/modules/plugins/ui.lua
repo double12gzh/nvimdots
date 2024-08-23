@@ -13,8 +13,8 @@ ui["akinsho/bufferline.nvim"] = {
 ui["Jint-lzxy/nvim"] = {
 	lazy = false,
 	branch = "refactor/syntax-highlighting",
-	name = "catppuccin",
-	config = require("ui.catppuccin"),
+	name = "gruvbox-material",
+	config = require("ui.gruvbox-material"),
 }
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,

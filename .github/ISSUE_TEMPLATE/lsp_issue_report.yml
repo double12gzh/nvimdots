@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        _Before reporting:_ Search [existing issues](https://github.com/ayamir/nvimdots/issues) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
+        _Before reporting:_ Search [existing issues](https://github.com/double12gzh/nvimdots/issues) and check the [FAQ](https://github.com/double12gzh/nvimdots/wiki/Issues). Thank you for helping us improve!
         > [!IMPORTANT]
         > The `0.11` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
   - type: checkboxes
@@ -20,7 +20,7 @@ body:
     id: prerequisites-done
     attributes:
       label: "Following prerequisites"
-      description: "I've checked everything mentioned in [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)."
+      description: "I've checked everything mentioned in [Wiki: Prerequisites](https://github.com/double12gzh/nvimdots/wiki/Prerequisites)."
       options:
         - label: "Confirm"
           required: true
@@ -28,7 +28,7 @@ body:
     id: not-user-config-issue
     attributes:
       label: "Not a user config issue"
-      description: "This issue _persists_ after removing ALL user configs. If this is not the case, you should open a [Custom (User) Config Issue](https://github.com/ayamir/nvimdots/issues/new?assignees=&labels=usage&projects=&template=custom_config.yml) instead."
+      description: "This issue _persists_ after removing ALL user configs. If this is not the case, you should open a [Custom (User) Config Issue](https://github.com/double12gzh/nvimdots/issues/new?assignees=&labels=usage&projects=&template=custom_config.yml) instead."
       options:
         - label: "Confirm"
           required: true

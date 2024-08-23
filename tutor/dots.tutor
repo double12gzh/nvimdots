@@ -24,8 +24,8 @@ between them. Also, `<A-n>`{normal} (with `n`{normal} being any number between 1
 switch to the desired buffer directly.
 
 NOTE: macOS users may need to remap their `<Option>`{normal}`(⌥)` meta key to `<Alt>`{normal} by
-      following the instructions provided in [this link](https://github.com/ayamir/nvimdots/issues/344).
-      [https://github.com/ayamir/nvimdots/issues/344](https://github.com/ayamir/nvimdots/issues/344)
+      following the instructions provided in [this link](https://github.com/double12gzh/nvimdots/issues/344).
+      [https://github.com/double12gzh/nvimdots/issues/344](https://github.com/double12gzh/nvimdots/issues/344)
 
 You can utilize `<C-n>`{normal} to toggle the file explorer, which will be displayed on the
 left side of your screen. Now, navigate the cursor to the line corresponding to the
@@ -149,7 +149,7 @@ Undoubtedly, you may be curious about where you can master the remaining 40%. Th
 answer lies in mastering the basic neovim motions. We have enhanced many of neovim's
 default abilities, allowing you to use them naturally if you are already an
 experienced neovim user. Additionally, you can explore more features by checking out
-https://github.com/ayamir/nvimdots/wiki!
+https://github.com/double12gzh/nvimdots/wiki!
 
 Last but not least, you can press `<C-p>`{normal} in normal mode to open the command panel and
 search for keymaps anytime you want!
