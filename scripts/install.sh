@@ -7,7 +7,7 @@
 set -uo pipefail
 
 # global-scope vars
-REQUIRED_NVIM_VERSION=0.10.0
+REQUIRED_NVIM_VERSION=0.11.0
 REQUIRED_NVIM_VERSION_LEGACY=0.9.0
 USE_SSH=1
 CLONE_ATTR=("--progress")
@@ -171,7 +171,7 @@ check_nvim_version() {
 
 clone_repo() {
 	if check_nvim_version "${REQUIRED_NVIM_VERSION}"; then
-		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.11" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
 	elif check_nvim_version "${REQUIRED_NVIM_VERSION_LEGACY}"; then
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
 		info "Automatically redirecting you to the latest compatible version..."
@@ -276,7 +276,7 @@ else
 fi
 
 cd "${DEST_DIR}" || return
-execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
+# execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
 
 if [[ "${USE_SSH}" -eq "0" ]]; then
 	info "Changing default fetching method to HTTPS..."
