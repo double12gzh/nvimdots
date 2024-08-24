@@ -15,4 +15,4 @@ end
 
 global:load_variables()
 
-return global
+return require("modules.utils").extend_config(global, "user.global")
