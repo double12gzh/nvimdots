@@ -1,4 +1,6 @@
-# 第一个阶段：基础依赖镜像
+#####################################
+# 第一个阶段：基础依赖镜像            #
+#####################################
 ARG NVIM_VERSION=v0.9.5
 ARG NVIM_CONFIG=https://github.com/double12gzh/nvimdots.git
 ARG DOTFILES=https://github.com/double12gzh/dotfiles.git
@@ -31,7 +33,9 @@ RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 
 
-# 第二个阶段：基础依赖镜像
+#####################################
+# 第二个阶段：系统依赖                #
+#####################################
 FROM ubuntu:22.04 AS dotfiles-sys
 
 ARG DOTFILES
@@ -69,7 +73,9 @@ RUN git clone "$DOTFILES" /root/dotfiles && mkdir /root/tools /root/packages && 
 RUN cd "$DOTFILE_INSTALL"/sys-apps && bash apt_install.sh
 
 
-# 第三个阶段：基础依赖镜像
+#####################################
+# 第三个阶段：编程语言                #
+#####################################
 FROM ubuntu:22.04 AS dotfiles-lang
 
 COPY --from=dotfiles-sys / /
@@ -83,7 +89,9 @@ ENV LC_ALL=en_US.UTF-8
 RUN cd "$DOTFILE_INSTALL" && bash install_lang.sh
 
 
-# 第四个阶段：基础依赖镜像
+#####################################
+# 第四个阶段：常用软件                #
+#####################################
 FROM ubuntu:22.04 AS dotfiles-app
 
 COPY --from=dotfiles-lang / /
@@ -101,7 +109,9 @@ RUN cd "$DOTFILE_INSTALL" && bash install_app.sh && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-# 第五个阶段：基础依赖镜像
+#####################################
+# 第五个阶段：nvim                   #
+#####################################
 FROM ubuntu:22.04 AS nvim
 
 ARG NVIM_CONFIG
@@ -161,7 +171,9 @@ RUN git clone https://github.com/double12gzh/nvimdots.git ~/.config/nvim && \
 RUN nvim --headless +Lazy +MasonInstallAll +TSUpdate +qall
 
 
-# 最终阶段：轻量级运行镜像
+#####################################
+# 最终阶段：轻量级运行镜像            #
+#####################################
 FROM ubuntu:22.04 AS final
 
 # 设置环境变量以避免交互安装
