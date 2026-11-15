@@ -6,7 +6,7 @@ settings["use_copilot"] = true
 settings["edit_prediction_source"] = "copilot"
 
 settings["colorscheme"] = "gruvbox-material"
-settings["diagnostics_virtual_lines"] = false
+settings["diagnostics_virtual_lines"] = true
 settings["diagnostics_level"] = "HINT"
 
 settings["format_disabled_dirs"] = function()
@@ -22,7 +22,6 @@ settings["disabled_plugins"] = function()
 		"Bekaboo/dropbar.nvim",
 		"folke/edgy.nvim",
 		"karb94/neoscroll.nvim",
-		"rachartier/tiny-inline-diagnostic.nvim",
 	}
 end
 

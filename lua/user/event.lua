@@ -86,6 +86,57 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	end,
 })
 
+local function setup_auto_english_ime()
+
+vim.api.nvim_create_user_command("UserInstallDeps", function()
+	local script = vim.fn.stdpath("config") .. "/scripts/user-deps.sh"
+	if vim.fn.filereadable(script) ~= 1 then
+		vim.notify("Dependency script not found: " .. script, vim.log.levels.ERROR, { title = "UserDeps" })
+		return
+	end
+	vim.cmd("botright 15split")
+	vim.fn.termopen({ "bash", script })
+	vim.cmd("startinsert")
+end, { desc = "Install external user dependencies (e.g. im-select)" })
+	local ime_cmd = vim.fn.executable("im-select") == 1 and "im-select"
+		or (vim.fn.executable("macism") == 1 and "macism" or nil)
+	if not ime_cmd then
+		return
+	end
+
+	local abc_id = "com.apple.keylayout.ABC"
+	local function switch_to_abc()
+		vim.system({ ime_cmd, abc_id }, { detach = true })
+	end
+
+	local ime_group = vim.api.nvim_create_augroup("UserAutoEnglishIME", { clear = true })
+	vim.api.nvim_create_autocmd("InsertLeave", {
+		group = ime_group,
+		callback = switch_to_abc,
+	})
+	vim.api.nvim_create_autocmd({ "FocusGained", "WinEnter" }, {
+		group = ime_group,
+		callback = function()
+			if vim.api.nvim_get_mode().mode:sub(1, 1) == "n" then
+				switch_to_abc()
+			end
+		end,
+	})
+end
+
+setup_auto_english_ime()
+
+vim.api.nvim_create_user_command("UserInstallDeps", function()
+	local script = vim.fn.stdpath("config") .. "/scripts/user-deps.sh"
+	if vim.fn.filereadable(script) ~= 1 then
+		vim.notify("Dependency script not found: " .. script, vim.log.levels.ERROR, { title = "UserDeps" })
+		return
+	end
+	vim.cmd("botright 15split")
+	vim.fn.termopen({ "bash", script })
+	vim.cmd("startinsert")
+end, { desc = "Install external user dependencies (e.g. im-select)" })
+
 local definitions = {
 	ft = function()
 		return {
