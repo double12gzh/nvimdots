@@ -1,6 +1,6 @@
 return function()
 	local dashboard = require("alpha.themes.dashboard")
-	local leader = " "
+	local leader = "space"
 
 	local function button(sc, txt, leader_txt, keybind, keybind_opts)
 		local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
@@ -15,14 +15,13 @@ return function()
 			hl_shortcut = "AlphaShortcut",
 		}
 
-		if nil == keybind then
-			keybind = sc_after
+		if keybind then
+			keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+			opts.keymap = { "n", sc_after, keybind, keybind_opts }
 		end
-		keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
-		opts.keymap = { "n", sc_after, keybind, keybind_opts }
 
 		local function on_press()
-			local key = vim.api.nvim_replace_termcodes(sc_after .. "<Ignore>", true, false, true)
+			local key = vim.api.nvim_replace_termcodes((keybind or sc_after) .. "<Ignore>", true, false, true)
 			vim.api.nvim_feedkeys(key, "t", false)
 		end
 
@@ -35,7 +34,7 @@ return function()
 	end
 
 	dashboard.section.buttons.val = {
-		button("space f c", " Scheme change", leader),
+		-- button("space f c", " Scheme change", leader),
 		button("space f r", " File frecency", leader),
 		button("space f e", "󰋚 File history", leader),
 		button("space f p", " Project find", leader),
