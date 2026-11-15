@@ -1,4 +1,5 @@
 local icons = { ui = require("modules.utils.icons").get("ui") }
+local default_icon_set = false
 
 return {
 	options = {
@@ -9,8 +10,12 @@ return {
 		enforce_regular_tabs = true,
 		persist_buffer_sort = true,
 		get_element_icon = function(buf)
-			require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
-			return require("nvim-web-devicons").get_icon(buf.filetype, { default = true })
+			local devicons = require("nvim-web-devicons")
+			if not default_icon_set then
+				devicons.set_default_icon("", "#6d8086", 65)
+				default_icon_set = true
+			end
+			return devicons.get_icon(buf.filetype, { default = true })
 		end,
 		offsets = function()
 			return {

@@ -21,7 +21,28 @@ settings["disabled_plugins"] = function()
 		"tpope/vim-sleuth",
 		"Bekaboo/dropbar.nvim",
 		"folke/edgy.nvim",
+		"karb94/neoscroll.nvim",
 		"rachartier/tiny-inline-diagnostic.nvim",
+	}
+end
+
+settings["server_formatting_block_list"] = {
+	clangd = true,
+	lua_ls = true,
+	ts_ls = true,
+	html = true,
+	yamlls = true,
+	ruff = false,
+}
+
+settings["null_ls_deps"] = function()
+	return {
+		"clang_format",
+		"goimports",
+		"prettier",
+		"shfmt",
+		"stylua",
+		"vint",
 	}
 end
 
