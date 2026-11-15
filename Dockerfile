@@ -65,8 +65,7 @@ RUN git clone "$DOTFILES" /root/dotfiles && mkdir -p /root/tools /root/packages 
     sed -i "s@releases/latest/download@releases/download/$NVIM_VERSION@g; s@nightly@$NVIM_VERSION@g" "$DOTFILE_INSTALL"/apps/nvim.sh && \
     sed -i "s@TS_VERSION=\"[^\"]*\"@TS_VERSION=\"$TS_VERSION\"@g" "$DOTFILE_INSTALL"/apps/treesitter.sh && \
     sed -i 's/\<sudo\>[[:space:]]*//g' "$DOTFILE_INSTALL"/sys-apps/apt_install.sh && \
-    sed -i "/ascii-image-converter/d" "$DOTFILE_INSTALL"/sys-apps/apt_install.sh && \
-    sed -i "/wait_for_user/d" "$DOTFILE_INSTALL"/config.sh
+    bash -n "$DOTFILE_INSTALL"/apps/nvim.sh "$DOTFILE_INSTALL"/apps/treesitter.sh "$DOTFILE_INSTALL"/sys-apps/apt_install.sh "$DOTFILE_INSTALL"/config.sh
 
 RUN cd "$DOTFILE_INSTALL"/sys-apps && bash apt_install.sh
 
@@ -121,9 +120,10 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
-ENV PATH="/root/go/bin:/root/.cargo/bin:/root/tools/golang/bin:/root/tools/julia/bin:/root/tools/lua/src:/root/tools/luajit/src:/root/tools/luarocks/bin:/root/tools/luarocks:/root/tools/nodejs/bin:/root/tools/perl/bin:/root/tools/nvim/bin:/root/tools/treesitter:/root/tools/tmux:/root/tools/stow/bin:/root/tools/lnav:/root/tools/jq:/root/tools/fzy:/root/tools/fzf/bin:/root/tools/cpufetch:/root/tools/btop/bin:/root/tools/ugrep/bin:/root/tools/qfc/bin:/root/.local/bin:/root/.local/share/zinit/polaris/bin:/root/.local/share/zinit/plugins/junegunn---fzf:/root/.local/share/zinit/plugins/sharkdp---bat/usr/bin:/root/.local/share/zinit/plugins/junegunn---fzf-tmux/bin:/root/.local/share/zinit/plugins/eth-p---bat-extras/src:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH="/root/go/bin:/root/.cargo/bin:/root/tools/golang/bin:/root/tools/julia/bin:/root/tools/lua/src:/root/tools/luajit/src:/root/tools/luarocks/bin:/root/tools/luarocks:/root/tools/nodejs/bin:/root/tools/perl/bin:/root/tools/nvim/bin:/root/tools/treesitter:/root/tools/tmux/bin:/root/tools/tmux:/root/tools/stow/bin:/root/tools/lnav:/root/tools/jq:/root/tools/fzy:/root/tools/fzf/bin:/root/tools/cpufetch:/root/tools/btop/bin:/root/tools/ugrep/bin:/root/tools/qfc/bin:/root/.local/bin:/root/.local/share/zinit/polaris/bin:/root/.local/share/zinit/plugins/junegunn---fzf:/root/.local/share/zinit/plugins/sharkdp---bat/usr/bin:/root/.local/share/zinit/plugins/junegunn---fzf-tmux/bin:/root/.local/share/zinit/plugins/eth-p---bat-extras/src:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 COPY --from=dotfiles-app / /
+COPY . /tmp/nvimdots-src
 
 RUN rm -rf ~/.zshenv && \
     if [ -f /root/dotfiles/.chezmoiroot ]; then \
@@ -132,7 +132,15 @@ RUN rm -rf ~/.zshenv && \
         cd /root/dotfiles && stow batcat cargo dlv fdfind git gotests lazygit lf local luarocks pip ssh starship tmux tmuxp zsh -R; \
     fi && \
     rm -rf ~/.config/nvim && \
-    (git clone -b "$NVIM_BRANCH" "$NVIM_CONFIG" ~/.config/nvim || git clone "$NVIM_CONFIG" ~/.config/nvim) && \
+    if git ls-remote --exit-code --heads "$NVIM_CONFIG" "$NVIM_BRANCH" >/dev/null 2>&1; then \
+        git clone -b "$NVIM_BRANCH" "$NVIM_CONFIG" ~/.config/nvim; \
+    elif [ -f /tmp/nvimdots-src/init.lua ]; then \
+        cp -a /tmp/nvimdots-src ~/.config/nvim; \
+    else \
+        echo "ERROR: branch '$NVIM_BRANCH' not found in '$NVIM_CONFIG' and no local build context available" >&2; \
+        exit 1; \
+    fi && \
+    rm -rf /tmp/nvimdots-src && \
     sed -i 's/settings\["use_ssh"\] = true/settings\["use_ssh"\] = false/' ~/.config/nvim/lua/user/settings.lua && \
     (command -v fd >/dev/null 2>&1 || (command -v fdfind >/dev/null 2>&1 && ln -sf "$(command -v fdfind)" /usr/local/bin/fd)) && \
     nvim --version && tree-sitter --version && fd --version && \
@@ -158,7 +166,7 @@ ENV TERM=xterm-256color
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
-ENV PATH="/root/go/bin:/root/.cargo/bin:/root/tools/golang/bin:/root/tools/julia/bin:/root/tools/lua/src:/root/tools/luajit/src:/root/tools/luarocks/bin:/root/tools/luarocks:/root/tools/nodejs/bin:/root/tools/perl/bin:/root/tools/nvim/bin:/root/tools/treesitter:/root/tools/tmux:/root/tools/stow/bin:/root/tools/lnav:/root/tools/jq:/root/tools/fzy:/root/tools/fzf/bin:/root/tools/cpufetch:/root/tools/btop/bin:/root/tools/ugrep/bin:/root/tools/qfc/bin:/root/.local/bin:/root/.local/share/zinit/polaris/bin:/root/.local/share/zinit/plugins/junegunn---fzf:/root/.local/share/zinit/plugins/sharkdp---bat/usr/bin:/root/.local/share/zinit/plugins/junegunn---fzf-tmux/bin:/root/.local/share/zinit/plugins/eth-p---bat-extras/src:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH="/root/go/bin:/root/.cargo/bin:/root/tools/golang/bin:/root/tools/julia/bin:/root/tools/lua/src:/root/tools/luajit/src:/root/tools/luarocks/bin:/root/tools/luarocks:/root/tools/nodejs/bin:/root/tools/perl/bin:/root/tools/nvim/bin:/root/tools/treesitter:/root/tools/tmux/bin:/root/tools/tmux:/root/tools/stow/bin:/root/tools/lnav:/root/tools/jq:/root/tools/fzy:/root/tools/fzf/bin:/root/tools/cpufetch:/root/tools/btop/bin:/root/tools/ugrep/bin:/root/tools/qfc/bin:/root/.local/bin:/root/.local/share/zinit/polaris/bin:/root/.local/share/zinit/plugins/junegunn---fzf:/root/.local/share/zinit/plugins/sharkdp---bat/usr/bin:/root/.local/share/zinit/plugins/junegunn---fzf-tmux/bin:/root/.local/share/zinit/plugins/eth-p---bat-extras/src:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # 从 nvim 镜像复制安装好的内容到 final 镜像
 COPY --from=nvim / /

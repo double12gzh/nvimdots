@@ -8,6 +8,8 @@ local pylsp_state = {
 	hook_registered = false,
 	pending = false,
 	job = nil,
+	rerun = false,
+	rerun_pkg = nil,
 	last_ok = nil,
 	last_err = nil,
 }
@@ -62,6 +64,9 @@ end
 
 local function install_pylsp_plugins(pkg)
 	if pylsp_state.job then
+		pylsp_state.pending = true
+		pylsp_state.rerun = true
+		pylsp_state.rerun_pkg = pkg
 		return
 	end
 
@@ -112,6 +117,14 @@ local function install_pylsp_plugins(pkg)
 		},
 		vim.schedule_wrap(function(res)
 			pylsp_state.job = nil
+			if pylsp_state.rerun then
+				local next_pkg = pylsp_state.rerun_pkg
+				pylsp_state.rerun = false
+				pylsp_state.rerun_pkg = nil
+				install_pylsp_plugins(next_pkg)
+				return
+			end
+
 			local ok = res.code == 0 and are_pylsp_plugins_installed(pkg)
 			pylsp_state.pending = false
 			pylsp_state.last_ok = ok
@@ -215,13 +228,27 @@ if vim.fn.exists(":MasonInstallAll") ~= 2 then
 			table.insert(candidates, mapped or dap_name)
 		end
 
+		local ok_pylsp, raw_pylsp_pkg = pcall(registry.get_package, "python-lsp-server")
+		local pylsp_pkg = ok_pylsp and raw_pylsp_pkg or nil
+		local pylsp_installing_before = pylsp_pkg ~= nil and pylsp_pkg.is_installing and pylsp_pkg:is_installing()
+
 		local seen = {}
 		local missing = {}
 		for _, pkg in ipairs(candidates) do
 			if pkg and not seen[pkg] then
 				seen[pkg] = true
-				if registry.has_package(pkg) and not registry.is_installed(pkg) then
-					table.insert(missing, pkg)
+				if registry.has_package(pkg) then
+					if pkg == "python-lsp-server" then
+						if not pylsp_installing_before then
+							local has_venv_py = registry.is_installed(pkg)
+								and vim.fn.executable(get_pylsp_venv_paths(pylsp_pkg).python) == 1
+							if not has_venv_py then
+								table.insert(missing, pkg)
+							end
+						end
+					elseif not registry.is_installed(pkg) then
+						table.insert(missing, pkg)
+					end
 				end
 			end
 		end
@@ -232,20 +259,56 @@ if vim.fn.exists(":MasonInstallAll") ~= 2 then
 			vim.cmd(prefix .. table.concat(missing, " "))
 		end
 
+		local wants_pylsp = vim.list_contains(settings.lsp_deps or {}, "pylsp")
+		local pylsp_installing_now = pylsp_pkg ~= nil and pylsp_pkg.is_installing and pylsp_pkg:is_installing()
 		if
-			not installing_pylsp
-			and vim.list_contains(settings.lsp_deps or {}, "pylsp")
+			wants_pylsp
+			and not installing_pylsp
+			and not pylsp_installing_now
 			and registry.is_installed("python-lsp-server")
 		then
-			local ok_pkg, pkg = pcall(registry.get_package, "python-lsp-server")
-			local target_pkg = ok_pkg and pkg or nil
-			if not are_pylsp_plugins_installed(target_pkg) then
-				install_pylsp_plugins(target_pkg)
+			if not are_pylsp_plugins_installed(pylsp_pkg) then
+				install_pylsp_plugins(pylsp_pkg)
 			end
 		end
 
-		if #vim.api.nvim_list_uis() == 0 and not wait_pylsp_install(300000) then
-			vim.cmd("1cq")
+		if #vim.api.nvim_list_uis() == 0 then
+			if wants_pylsp and pylsp_installing_now then
+				local settled = false
+				local install_ok = false
+				if pylsp_pkg.once then
+					pylsp_pkg:once("install:success", function()
+						settled = true
+						install_ok = true
+					end)
+					pylsp_pkg:once("install:failed", function()
+						settled = true
+						install_ok = false
+					end)
+				end
+				local done = vim.wait(300000, function()
+					if settled then
+						return not install_ok or pylsp_state.pending or pylsp_state.job ~= nil
+					end
+					return not pylsp_pkg:is_installing() and (pylsp_state.pending or pylsp_state.job ~= nil)
+				end, 50)
+				if not done or (settled and not install_ok) then
+					vim.api.nvim_err_writeln(
+						not done and "Timed out waiting for Mason python-lsp-server installation"
+							or "Mason python-lsp-server installation failed"
+					)
+					vim.cmd("1cq")
+					return
+				end
+			end
+			if not wait_pylsp_install(300000) then
+				vim.cmd("1cq")
+				return
+			end
+			if wants_pylsp and pylsp_installing_before and not are_pylsp_plugins_installed(pylsp_pkg) then
+				vim.api.nvim_err_writeln("python-lsp-server installation failed before pylsp plugins could install")
+				vim.cmd("1cq")
+			end
 		end
 	end, { desc = "Install all configured Mason packages" })
 end
