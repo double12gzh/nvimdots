@@ -223,11 +223,9 @@ function check_and_fetch_exec ([Parameter(Mandatory = $True)][ValidateNotNullOrE
 	Write-Host $_str.substring(0,[System.Math]::Min(40,$_str.Length)) -NoNewline
 
 	if (-not (check_in_path -WithName $PkgName)) {
-		Start-Sleep -Milliseconds 350
 		Write-Host "Failed" -ForegroundColor Red
 		_install_exe -WithName $PkgName
 	} else {
-		Start-Sleep -Milliseconds 350
 		Write-Host "Success" -ForegroundColor Green
 	}
 }
