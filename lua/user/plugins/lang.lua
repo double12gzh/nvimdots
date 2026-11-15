@@ -6,7 +6,9 @@ local lang = {}
 -- `ftplugin/rust.lua` when a Rust buffer is actually opened.
 lang["mrcjkb/rustaceanvim"] = {
 	init = false,
-	config = require("lang.rust"),
+	config = function()
+		require("lang.rust")()
+	end,
 }
 
 return lang

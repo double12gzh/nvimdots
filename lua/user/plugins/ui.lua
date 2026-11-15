@@ -12,7 +12,15 @@ ui["Jint-lzxy/nvim"] = {
 	lazy = true,
 }
 
+ui["goolord/alpha-nvim"] = {
+	event = function()
+		return vim.fn.argc(-1) == 0 and { "BufWinEnter" } or {}
+	end,
+	cmd = "Alpha",
+}
+
 ui["mrjones2014/smart-splits.nvim"] = {
+	event = false,
 	cmd = {
 		"SmartCursorMoveLeft",
 		"SmartCursorMoveDown",
@@ -26,6 +34,30 @@ ui["mrjones2014/smart-splits.nvim"] = {
 		"SmartSwapDown",
 		"SmartSwapUp",
 		"SmartSwapRight",
+	},
+}
+
+ui["lewis6991/gitsigns.nvim"] = {
+	event = function()
+		return { "BufReadPre", "BufNewFile" }
+	end,
+}
+
+ui["lukas-reineke/indent-blankline.nvim"] = {
+	event = function()
+		return { "BufReadPost", "BufNewFile" }
+	end,
+}
+
+ui["folke/todo-comments.nvim"] = {
+	event = function()
+		return { "BufReadPost", "BufNewFile" }
+	end,
+	cmd = {
+		"TodoTrouble",
+		"TodoTelescope",
+		"TodoQuickFix",
+		"TodoLocList",
 	},
 }
 

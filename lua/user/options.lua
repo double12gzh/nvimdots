@@ -22,8 +22,6 @@ local options = {
 	scrolloff = 2,
 	writebackup = false,
 	jumpoptions = "stack",
-	foldmethod = "expr",
-	foldexpr = "v:lua.vim.treesitter.foldexpr()",
 }
 
 return options
