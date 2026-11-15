@@ -7,12 +7,12 @@ on:
     - cron: 30 01 * * *
 
 env:
-  BRANCH: "main"
+  BRANCH: "0.12"
   COMMIT_MESSAGE: "chore(lockfile): auto update lazy-lock.json"
 
 jobs:
   update-lockfile:
-    if: github.repository_owner == 'ayamir'
+    if: github.repository_owner == 'double12gzh'
     permissions:
       contents: write
       id-token: write

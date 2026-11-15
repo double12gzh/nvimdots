@@ -7,8 +7,8 @@
 set -uo pipefail
 
 # global-scope vars
-REQUIRED_NVIM_VERSION=0.11.0
-REQUIRED_NVIM_VERSION_LEGACY=0.10.0
+REQUIRED_NVIM_VERSION=0.12.0
+REQUIRED_NVIM_VERSION_LEGACY=0.11.0
 USE_SSH=1
 CLONE_ATTR=("--progress")
 DEST_DIR="${HOME}/.config/nvim"
@@ -171,11 +171,11 @@ check_nvim_version() {
 
 clone_repo() {
 	if check_nvim_version "${REQUIRED_NVIM_VERSION}"; then
-		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.12" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
 	elif check_nvim_version "${REQUIRED_NVIM_VERSION_LEGACY}"; then
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
 		info "Automatically redirecting you to the latest compatible version..."
-		execute "git" "clone" "-b" "0.10" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.11" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION_LEGACY})."
 		abort "$(
@@ -246,7 +246,7 @@ if [[ -n "${NONINTERACTIVE-}" ]]; then
 	USE_SSH=0
 fi
 
-info "This script will install ayamir/nvimdots to:"
+info "This script will install double12gzh/nvimdots to:"
 echo "${DEST_DIR}"
 
 if [[ -d "${DEST_DIR}" ]]; then
@@ -270,15 +270,17 @@ fi
 
 info "Fetching in progress..."
 if [[ "${USE_SSH}" -eq "1" ]]; then
-	clone_repo "git@github.com:ayamir/nvimdots.git"
+	clone_repo "git@github.com:double12gzh/nvimdots.git"
 else
-	clone_repo "https://github.com/ayamir/nvimdots.git"
+	clone_repo "https://github.com/double12gzh/nvimdots.git"
 fi
 
 cd "${DEST_DIR}" || return
-execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
+if [[ ! -d "${DEST_DIR}/lua/user" ]]; then
+	execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
+fi
 
-if [[ "${USE_SSH}" -eq "0" ]]; then
+if [[ "${USE_SSH}" -eq "0" && -f "${DEST_DIR}/lua/user/settings.lua" ]]; then
 	info "Changing default fetching method to HTTPS..."
 	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/user/settings.lua"
 fi
@@ -292,9 +294,9 @@ cat <<EOS
 
 Thank you for using this set of configuration!
 - Project Homepage:
-    ${tty_underline}https://github.com/ayamir/nvimdots${tty_reset}
+    ${tty_underline}https://github.com/double12gzh/nvimdots${tty_reset}
 - Further documentation (including executables you ${tty_bold}must${tty_reset} install for full functionality):
-    ${tty_underline}https://github.com/ayamir/nvimdots/wiki/Prerequisites${tty_reset}
+    ${tty_underline}https://github.com/double12gzh/nvimdots/wiki/Prerequisites${tty_reset}
 EOS
 
 if [[ -z "${NONINTERACTIVE-}" ]]; then

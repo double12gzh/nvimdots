@@ -9,8 +9,8 @@ $ErrorActionPreference = "Stop" # Exit when command fails
 
 # global-scope vars
 $USE_SSH = $True
-$REQUIRED_NVIM_VERSION = [version]'0.11.0'
-$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.10.0'
+$REQUIRED_NVIM_VERSION = [version]'0.12.0'
+$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.11.0'
 
 # package mgr vars
 $choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "sudo" = "psutils"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
@@ -21,8 +21,8 @@ $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
 $env:CCPACK_MGR ??= 'unknown'
 $env:CCLONE_ATTR ??= 'undef'
-$env:CCLONE_BRANCH ??= 'main'
-$env:CCLONE_BRANCH_LEGACY ??= '0.10'
+$env:CCLONE_BRANCH ??= '0.12'
+$env:CCLONE_BRANCH_LEGACY ??= '0.11'
 $env:CCDEST_DIR ??= "$env:XDG_CONFIG_HOME\nvim"
 $env:CCBACKUP_DIR = "$env:CCDEST_DIR" + "_backup-" + (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmss")
 
@@ -349,7 +349,7 @@ You must install Git before installing this Nvim config. See:
 '@
 	}
 
-	info -Msg "This script will install ayamir/nvimdots to:"
+	info -Msg "This script will install double12gzh/nvimdots to:"
 	Write-Host $env:CCDEST_DIR
 
 	if ((Test-Path $env:CCDEST_DIR)) {
@@ -371,15 +371,17 @@ You must install Git before installing this Nvim config. See:
 	info -Msg "Fetching in progress..."
 
 	if ($USE_SSH) {
-		clone_repo -WithURL 'git@github.com:ayamir/nvimdots.git'
+		clone_repo -WithURL 'git@github.com:double12gzh/nvimdots.git'
 	} else {
-		clone_repo -WithURL 'https://github.com/ayamir/nvimdots.git'
+		clone_repo -WithURL 'https://github.com/double12gzh/nvimdots.git'
 	}
 
 	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
-	safe_execute -WithCmd { Copy-Item -Path "$env:CCDEST_DIR\lua\user_template\" -Destination "$env:CCDEST_DIR\lua\user" -Recurse -Force }
+	if (-not (Test-Path "$env:CCDEST_DIR\lua\user")) {
+		safe_execute -WithCmd { Copy-Item -Path "$env:CCDEST_DIR\lua\user_template\" -Destination "$env:CCDEST_DIR\lua\user" -Recurse -Force }
+	}
 
-	if (-not $USE_SSH) {
+	if ((-not $USE_SSH) -and (Test-Path "$env:CCDEST_DIR\lua\user\settings.lua")) {
 		info -Msg "Changing default fetching method to HTTPS..."
 		safe_execute -WithCmd {
 			(Get-Content "$env:CCDEST_DIR\lua\user\settings.lua") |
@@ -397,11 +399,11 @@ You must install Git before installing this Nvim config. See:
 
 Thank you for using this set of configuration!
 - Project Homepage:
-    https://github.com/ayamir/nvimdots
-    ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+    https://github.com/double12gzh/nvimdots
+    ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 - Further documentation (including executables you |must| install for full functionality):
-    https://github.com/ayamir/nvimdots/wiki/Prerequisites
-    ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+    https://github.com/double12gzh/nvimdots/wiki/Prerequisites
+    ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 '@
 
 	ring_bell
