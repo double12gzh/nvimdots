@@ -33,6 +33,8 @@ return function()
 		}
 	end
 
+	local aichat_icons = require("modules.utils.icons").get("aichat", true)
+
 	dashboard.section.buttons.val = {
 		-- button("space f c", " Scheme change", leader),
 		button("space f r", " File frecency", leader),
@@ -41,6 +43,7 @@ return function()
 		button("space f f", "󰈞 File find", leader),
 		button("space f n", " File new", leader),
 		button("space f w", " Word find", leader),
+		button("space c w", aichat_icons.Chat .. "AI workspace", leader),
 	}
 	dashboard.section.buttons.opts.hl = "AlphaButtons"
 

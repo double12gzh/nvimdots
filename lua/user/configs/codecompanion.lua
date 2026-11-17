@@ -166,6 +166,10 @@ return function(opts)
 			return aichat_icons.Chat .. "CodeCompanion (" .. adapter.formatted_name .. ")"
 		end,
 	})
+	opts.interactions.chat.keymaps = opts.interactions.chat.keymaps or {}
+	-- Remove legacy v19 duplicate `submit` keymap inherited from upstream module config
+	opts.interactions.chat.keymaps.submit = nil
+
 	opts.opts = vim.tbl_deep_extend("force", opts.opts or {}, { language = "Chinese" })
 
 	opts.adapters = opts.adapters or {}
@@ -283,10 +287,15 @@ return function(opts)
 
 	opts.display = opts.display or {}
 	opts.display.chat = opts.display.chat or {}
+	-- Avoid colliding with render-markdown.nvim H2 banner on role headings
+	opts.display.chat.show_header_separator = false
+	opts.display.chat.intro_message = aichat_icons.Chat
+		.. "Enter/C-s 发送 · / 命令 · # 上下文 · ga 切换模型 · q 停止/收起 · ? 帮助"
 	opts.display.chat.window = vim.tbl_deep_extend("force", opts.display.chat.window or {}, {
 		layout = "vertical",
 		position = "right",
 		width = 0.32,
+		pertab = true,
 	})
 	opts.display.cli = vim.tbl_deep_extend("force", opts.display.cli or {}, {
 		window = {
@@ -316,12 +325,19 @@ return function(opts)
 		opts.extensions.history.opts.auto_generate_title = false
 	end
 
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "CodeCompanionChatCreated",
-		once = true,
-		callback = patch_chat_context_stripper,
-	})
-	vim.schedule(patch_chat_context_stripper)
+	opts.extensions.workspace = {
+		enabled = true,
+		callback = "codecompanion._extensions.workspace",
+		opts = {},
+	}
+
+	patch_chat_context_stripper()
+	vim.schedule(function()
+		if not package.loaded["lualine"] then
+			pcall(require, "lualine")
+		end
+		patch_chat_context_stripper()
+	end)
 
 	return opts
 end

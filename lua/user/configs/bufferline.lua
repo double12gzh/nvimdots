@@ -1,4 +1,7 @@
-local icons = { ui = require("modules.utils.icons").get("ui") }
+local icons = {
+	ui = require("modules.utils.icons").get("ui"),
+	aichat = require("modules.utils.icons").get("aichat", true),
+}
 local default_icon_set = false
 
 return {
@@ -24,6 +27,12 @@ return {
 					text = "File Explorer",
 					text_align = "center",
 					padding = 1,
+				},
+				{
+					filetype = "cc-workspace",
+					text = icons.aichat.Chat .. "AI Workspace",
+					text_align = "center",
+					padding = 0,
 				},
 				{
 					filetype = "lspsagaoutline",
