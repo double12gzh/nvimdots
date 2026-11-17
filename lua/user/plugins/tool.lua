@@ -19,9 +19,14 @@ if settings.use_chat then
 	}
 
 	tool["olimorris/codecompanion.nvim"] = {
+		pin = true,
 		dependencies = {
 			"double12gzh/cc-workspace.nvim",
 		},
+	}
+
+	tool["ravitemer/codecompanion-history.nvim"] = {
+		pin = true,
 	}
 end
 
